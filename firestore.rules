@@ -1,0 +1,53 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Inventory Collection
+    match /inventory/{itemId} {
+      allow read: if true;
+      allow write: if true;
+    }
+
+    // Stock Movements Audit Logs
+    match /stock_movements/{movementId} {
+      allow read: if true;
+      allow create, update: if true;
+      allow delete: if false; // audit log immutability
+    }
+
+    // Queues
+    match /queues/{queueId} {
+      allow read, write: if true;
+    }
+
+    // Chairs / Stations
+    match /chairs/{chairId} {
+      allow read, write: if true;
+    }
+
+    // Reservations
+    match /reservations/{resId} {
+      allow read, write: if true;
+    }
+
+    // Transactions
+    match /transactions/{transId} {
+      allow read, write: if true;
+    }
+
+    // Customer Feedback
+    match /feedback/{feedbackId} {
+      allow read, write: if true;
+    }
+
+    // Shop Settings
+    match /settings/{settingId} {
+      allow read, write: if true;
+    }
+
+    // Fallback for general collections
+    match /{document=**} {
+      allow read, write: if true;
+    }
+  }
+}
+

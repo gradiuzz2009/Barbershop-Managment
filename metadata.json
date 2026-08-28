@@ -1,0 +1,8 @@
+{
+  "name": "Remix Barbershop Manager",
+  "description": "Sistem manajemen operasional barbershop modern dengan antrean langsung, reservasi cerdas, pencatatan keuangan, manajemen inventaris produk grooming \u0026 alert stok menipis, serta integrasi survei kepuasan pelanggan.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

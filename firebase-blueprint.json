@@ -1,0 +1,128 @@
+{
+  "entities": {
+    "reservations": {
+      "title": "Reservations",
+      "description": "Barbershop customer booking reservations",
+      "type": "object",
+      "properties": {
+        "customerName": { "type": "string" },
+        "customerPhone": { "type": "string" },
+        "serviceName": { "type": "string" },
+        "servicePrice": { "type": "number" },
+        "serviceDuration": { "type": "number" },
+        "barberName": { "type": "string" },
+        "date": { "type": "string" },
+        "time": { "type": "string" },
+        "status": { "type": "string", "enum": ["Diminta", "Dikonfirmasi", "Tunggu", "Proses", "Selesai", "Dibatalkan"] },
+        "notes": { "type": "string" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["customerName", "serviceName", "date", "time", "status"]
+    },
+    "queues": {
+      "title": "Live Queue",
+      "description": "Active queue tickets and waiting room entries",
+      "type": "object",
+      "properties": {
+        "queueNumber": { "type": "string" },
+        "customerName": { "type": "string" },
+        "serviceName": { "type": "string" },
+        "barberName": { "type": "string" },
+        "chairId": { "type": "string" },
+        "status": { "type": "string", "enum": ["Tiba", "Tunggu", "Proses", "Selesai", "Batal"] },
+        "type": { "type": "string", "enum": ["Walk-in", "Booking App", "VIP", "Reguler"] },
+        "waitingTimeMinutes": { "type": "number" },
+        "estimatedTime": { "type": "string" },
+        "startedAt": { "type": "string" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["queueNumber", "customerName", "serviceName", "status"]
+    },
+    "chairs": {
+      "title": "Barber Chair Stations",
+      "description": "Chair workstation real-time operational status",
+      "type": "object",
+      "properties": {
+        "chairNumber": { "type": "number" },
+        "barberName": { "type": "string" },
+        "barberRole": { "type": "string" },
+        "status": { "type": "string", "enum": ["Tersedia", "Proses", "Overtime", "Istirahat"] },
+        "currentTicket": { "type": "string" },
+        "currentCustomer": { "type": "string" },
+        "currentService": { "type": "string" },
+        "elapsedMinutes": { "type": "number" },
+        "durationMinutes": { "type": "number" },
+        "startedAt": { "type": "string" }
+      },
+      "required": ["chairNumber", "barberName", "status"]
+    },
+    "transactions": {
+      "title": "Transactions & Payments",
+      "description": "Completed service sales transactions",
+      "type": "object",
+      "properties": {
+        "customerName": { "type": "string" },
+        "serviceName": { "type": "string" },
+        "barberName": { "type": "string" },
+        "amount": { "type": "number" },
+        "paymentMethod": { "type": "string" },
+        "date": { "type": "string" },
+        "time": { "type": "string" },
+        "rating": { "type": "number" }
+      },
+      "required": ["customerName", "amount", "paymentMethod", "date"]
+    },
+    "feedback": {
+      "title": "Customer Feedback & Google Forms",
+      "description": "Ratings and reviews submitted via Google Forms / App",
+      "type": "object",
+      "properties": {
+        "customerName": { "type": "string" },
+        "barberName": { "type": "string" },
+        "rating": { "type": "number" },
+        "comment": { "type": "string" },
+        "formSubmissionId": { "type": "string" },
+        "date": { "type": "string" }
+      },
+      "required": ["customerName", "rating"]
+    },
+    "inventory": {
+      "title": "Inventory Grooming Products",
+      "description": "Grooming products and retail stock levels with minimum reorder thresholds",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "sku": { "type": "string" },
+        "category": { "type": "string", "enum": ["Pomade & Clay", "Beard & Mustache", "Hair Care & Tonic", "Shaving & Razor", "Accessories & Tools"] },
+        "stockLevel": { "type": "number" },
+        "minStockLevel": { "type": "number" },
+        "unitPrice": { "type": "number" },
+        "costPrice": { "type": "number" },
+        "unit": { "type": "string" },
+        "supplier": { "type": "string" },
+        "lastRestocked": { "type": "string" },
+        "description": { "type": "string" },
+        "imageUrl": { "type": "string" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["name", "sku", "stockLevel", "minStockLevel", "unitPrice"]
+    },
+    "stock_movements": {
+      "title": "Stock Movement Audit Logs",
+      "description": "Historical records of stock restocks, deductions, sales, and manual adjustments",
+      "type": "object",
+      "properties": {
+        "itemId": { "type": "string" },
+        "itemName": { "type": "string" },
+        "type": { "type": "string", "enum": ["Restock", "Penjualan", "Penyesuaian", "Rusak/Kadaluarsa"] },
+        "quantity": { "type": "number" },
+        "previousStock": { "type": "number" },
+        "newStock": { "type": "number" },
+        "date": { "type": "string" },
+        "notes": { "type": "string" },
+        "performedBy": { "type": "string" }
+      },
+      "required": ["itemId", "itemName", "type", "quantity", "newStock", "date"]
+    }
+  }
+}
